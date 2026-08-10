@@ -1,0 +1,49 @@
+<!doctype html><html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#18351f"><title>Логикоры — три математических приключения</title><link rel="stylesheet" href="styles.css"></head>
+<body><div class="shade"></div>
+<header class="hud">
+  <h1 class="field-title">Математическая поляна<small>ИГРАЙ · РЕШАЙ · ПОБЕЖДАЙ</small></h1>
+  <section class="wallet" aria-label="Награды"><span class="coin">●</span><b id="coinsValue">0</b><span class="star">★</span><b id="starsValue">0</b></section>
+</header>
+<main id="games">
+  <section class="intro"><p>МАТЕМАТИЧЕСКАЯ ПОЛЯНА</p><h1>Выбери приключение</h1><div class="scoreline"><span>Общий счёт <b id="totalScore">0</b></span><span>Побед <b id="winsValue">0</b></span><button id="resetProgress">Сбросить прогресс</button></div></section>
+  <section class="cards">
+    <button class="game-card card-one" data-game="proportion"><span class="reward">★ 3 &nbsp; ● 30</span><span class="wood-title">Пропорции<br>на тропе</span><span class="card-picture"></span><span class="card-copy">Помоги еноту восстановить мост:<br>реши 5 задач на пропорции</span><span class="play">Играть <b>›</b></span></button>
+    <button class="game-card card-two" data-game="equation"><span class="reward">★ 4 &nbsp; ● 40</span><span class="wood-title purple">Лаборатория<br>уравнений</span><span class="card-picture"></span><span class="card-copy">Помоги выдре запустить установку:<br>реши 5 уравнений</span><span class="play">Играть <b>›</b></span></button>
+    <button class="game-card card-three" data-game="tournament"><span class="reward">★ 5 &nbsp; ● 50</span><span class="wood-title blue">Турнир 11×11</span><span class="card-picture"></span><span class="card-copy">Победи лисёнка в турнире:<br>7 примеров на время</span><span class="play">Играть <b>›</b></span></button>
+  </section>
+</main>
+<dialog id="gameModal"><div class="modal-shell"><button class="close" aria-label="Закрыть">×</button><div class="game-head"><small id="gameType"></small><h2 id="gameTitle"></h2><p id="gameText"></p></div><div class="round-status"><span id="roundValue">ЗАДАНИЕ 1 / 5</span><span id="livesValue">♥ ♥ ♥</span></div><div id="gameArea" class="game-area"></div><div class="game-foot"><span id="gameScore">ОЧКИ: 0</span><button id="gameAction">НАЧАТЬ</button></div></div></dialog>
+<dialog id="trailGame" class="trail-dialog">
+  <div class="trail-shell">
+    <header class="trail-hud"><button id="trailExit" aria-label="Вернуться к витрине">← Карта</button><strong>ПРОПОРЦИИ НА ТРОПЕ</strong><div><span id="trailStars">☆☆☆</span><span>● <b id="trailCoins">0</b></span><button id="trailSound" aria-label="Включить или выключить звук">🔊</button><button id="trailPause" aria-label="Пауза">Ⅱ</button></div></header>
+    <section class="forest-scene">
+      <div class="sun-particles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+      <div id="raccoonGuide" class="raccoon-guide"><p id="raccoonSpeech">Вот это задачка! Пять решений — и мост снова откроет путь.</p></div>
+      <div class="bridge-wrap"><div class="cliff left-cliff"></div><svg class="bridge" viewBox="0 0 800 220" role="img" aria-label="Разрушенный мост, который восстанавливается по мере решения задач"><path class="rope rope-a" d="M20 60 Q400 175 780 60"/><path class="rope rope-b" d="M20 86 Q400 200 780 86"/><g id="bridgePlanks"></g><path class="support" d="M390 120 L390 215 M410 120 L410 215"/></svg><div class="cliff right-cliff"><span>🏕️</span></div></div>
+    </section>
+    <section class="trail-panel">
+      <div class="trail-progress"><span>ВОССТАНОВИ МОСТ</span><b id="trailProgress">0 / 5</b><div id="trailDots">○ ○ ○ ○ ○</div></div>
+      <div id="trailTask" class="trail-task"></div>
+      <div class="trail-actions"><button id="trailHint">💡 Подсказка</button><span id="trailMessage" role="status"></span></div>
+    </section>
+    <section id="pauseScreen" class="pause-screen" hidden><h2>ПАУЗА</h2><button data-pause="resume">Продолжить</button><button data-pause="sound">Звук: вкл</button><button data-pause="restart">Начать заново</button><button data-pause="exit">Выйти</button></section>
+  </div>
+</dialog>
+<dialog id="labGame" class="lab-dialog">
+  <div class="lab-shell">
+    <header class="lab-hud"><button id="labExit">← Поляна</button><strong>ЛАБОРАТОРИЯ УРАВНЕНИЙ</strong><div><span id="labStars">☆☆☆</span><span>XP <b id="labXP">0</b></span><button id="labSound">🔊</button></div></header>
+    <section class="lab-scene">
+      <div class="lab-modules" id="labModules"><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="reactor"><div class="reactor-rings"><i></i><i></i><i></i></div><div class="crystal">◆</div></div>
+      <div class="otter-speech" id="otterSpeech">Ой… установка опять решила немного взбунтоваться.</div>
+      <div class="lab-flasks"><i></i><i></i><i></i></div>
+    </section>
+    <section class="lab-panel"><div class="lab-progress"><small>ЗАПУСК УСТАНОВКИ</small><b id="labProgress">0 / 5</b><span id="labDots">○ ○ ○ ○ ○</span></div><div class="lab-task" id="labTask"></div><div class="lab-side"><button id="labHint">💡 Подсказка</button><span id="labMessage"></span></div></section>
+  </div>
+</dialog>
+<dialog id="tournamentGame" class="tournament-dialog"><div class="tournament-shell">
+  <header class="tournament-hud"><button id="tournamentExit">← Поляна</button><strong>СЕКРЕТНЫЙ ПРИЁМ 11</strong><div><span>ОЧКИ <b id="tournamentScore">0</b></span><span>COMBO <b id="tournamentCombo">×0</b></span><button id="tournamentSound">🔊</button></div></header>
+  <section class="tournament-scene"><div class="scoreboard"><small id="roundLabel">ТРЕНИРОВКА</small><strong id="boardEquation">23 × 11</strong><span id="boardResult">2 [?] 3</span></div><div class="fox-speech" id="foxSpeech">Крайние цифры уже на месте. Найди только середину!</div><div class="power"><span>⚡ СИЛА 11</span><i><b id="powerFill"></b></i></div><div class="race-track" id="raceTrack"><span class="fox-marker" id="foxMarker">🦊</span><div class="track-line"></div><div class="checkpoints"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><em>🏆</em></div></section>
+  <section class="tournament-panel"><div class="round-info"><small>РАУНД</small><b id="tournamentRound">0 / 7</b><span id="tournamentDots">○ ○ ○ ○ ○ ○ ○</span></div><div class="tournament-task" id="tournamentTask"></div><div class="tournament-side"><button id="tournamentHint">💡 Подсказка</button><span id="tournamentMessage"></span></div></section>
+</div></dialog>
+<script src="app.js"></script><script src="trail-game.js"></script><script src="lab-game.js"></script><script src="tournament-game.js"></script></body></html>
